@@ -6,6 +6,7 @@ function VideoUrlInput({handleVideoUrl}) {
     const [url, setUrl] = useState('')
 
     useEffect(() => {
+        
         if(url){
             handleVideoUrl(url)
         }
