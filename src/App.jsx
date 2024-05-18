@@ -3,22 +3,26 @@ import './App.css'
 import styles from '../styles/app.module.css'
 import VideoUrlInput from './components/Inputs/VideoUrlInput'
 import VideoPlayer from './components/VideoPlayer'
-import TimestampInputs from './components/Inputs/TimestampInputs'
 import { convertToSeconds } from './util/util'
+import CaptionInput from './components/Inputs/CaptionInput'
+import TimestampInputs from './components/Inputs/TimestampInputs'
 
 function App() {
 
   const [videoUrl, setVideoUrl] = useState('')
   const [startingTimestamp, setStartingTimestamp] = useState(0)
   const [endingTimestamp, setEndingTimestamp] = useState(0)
+  const [captionText, setCaptionText] = useState('')
+  const [generateError, setGenerateError] = useState()
+  const [captionData, setCaptionData] = useState({})
 
   const handleVideoUrl = useCallback((url) => {
-    if(url) setVideoUrl(url)
+    if (url) setVideoUrl(url)
   }, [videoUrl])
 
   const handleTimestampInput = (data) => {
-    let {hours, minutes, seconds, type} = data
-    if(type === "FROM") {
+    let { hours, minutes, seconds, type } = data
+    if (type === "FROM") {
       let value = convertToSeconds(hours, minutes, seconds)
       setStartingTimestamp(value)
     } else if (type === "TO") {
@@ -27,21 +31,44 @@ function App() {
     }
   }
 
-  console.log(startingTimestamp, "STARTING TIMEE")
+  const handleCaption = useCallback((value) => {
+    setCaptionText(value)
+  }, [captionText])
+
+  const generateCaption = () => {
+    try {
+      let obj = {}
+      obj[startingTimestamp] = {timeStart: startingTimestamp, timeEnd: endingTimestamp, text: captionText}
+      setCaptionData({...captionData, ...obj})
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   return (
     <>
-      {/* <h1 className={styles.heading}>Video Caption</h1>
-      <VideoUrlInput handleVideoUrl={handleVideoUrl}/>
+      <h1 className={styles.heading}>Video Caption</h1>
+      <VideoUrlInput handleVideoUrl={handleVideoUrl} />
 
-      {
-        videoUrl && <VideoPlayer url={videoUrl}/>
-      } */}
+      <div className={styles['timestamp-container']}>
+        <div>
+          <TimestampInputs 
+            timestampType="FROM" 
+            handleTimestampInput={handleTimestampInput}
+          />
+        </div>
+        <div>
+          <TimestampInputs 
+            timestampType="TO" 
+            handleTimestampInput={handleTimestampInput}
+          />
+        </div>
+      </div>
 
-      <TimestampInputs 
-        timestampType={'FROM'}
-        handleTimestampInput={handleTimestampInput}
-      />
+
+      <CaptionInput handleCaption={handleCaption} />
+
+      <button onClick={() => generateCaption()} className={styles.generatebutton}>Generate</button>
     </>
   )
 }

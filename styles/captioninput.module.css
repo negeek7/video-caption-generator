@@ -1,0 +1,10 @@
+.textinput{
+    resize: none;
+    height: 180px;
+    width: 280px;
+    box-shadow: 0px 0px 32px -3px rgba(59,52,134,1);
+    outline: none;
+    border-radius: 4px;
+    margin-top: 20px;
+    padding: 1rem;
+}

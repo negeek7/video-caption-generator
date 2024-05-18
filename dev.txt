@@ -1,0 +1,4 @@
+// record starting and ending time stamps ~~ DONE
+// caption input ~~ DONE
+// Make a caption storage structure
+ 

@@ -9,9 +9,9 @@ function TimestampInputs({ timestampType, handleTimestampInput }) {
     const [seconds, setSeconds] = useState(0)
 
     useEffect(() => {
-        if(hours || minutes || seconds) {
+        if (hours || minutes || seconds) {
             setTimeout(() => {
-                handleTimestampInput({hours, minutes, seconds, type: timestampType})
+                handleTimestampInput({ hours, minutes, seconds, type: timestampType })
             }, 900)
         }
     }, [hours, minutes, seconds])
@@ -34,35 +34,37 @@ function TimestampInputs({ timestampType, handleTimestampInput }) {
     }
 
     return (
-        <div className={styles.container}>
-            <label htmlFor={timestampType}>{timestampType}</label>
-            <input
-                type="text"
-                id={timestampType}
-                onChange={(e) => handleInput(e, 'hours')}
-                value={hours}
-                className={styles.input}
-                placeholder='H'
-            />
-            :
-            <input
-                type="text"
-                id={timestampType}
-                onChange={(e) => handleInput(e, 'minutes')}
-                value={minutes}
-                className={styles.input}
-                placeholder='M'
-            />
-            :
-            <input
-                type="text"
-                id={timestampType}
-                onChange={(e) => handleInput(e, 'seconds')}
-                value={seconds}
-                className={styles.input}
-                placeholder='S'
-            />
-        </div>
+        <>
+            <p className={styles.type}>{timestampType}</p>
+            <div className={styles.container}>
+                <input
+                    type="text"
+                    id={timestampType}
+                    onChange={(e) => handleInput(e, 'hours')}
+                    value={hours}
+                    className={styles.input}
+                    placeholder='H'
+                />
+                :
+                <input
+                    type="text"
+                    id={timestampType}
+                    onChange={(e) => handleInput(e, 'minutes')}
+                    value={minutes}
+                    className={styles.input}
+                    placeholder='M'
+                />
+                :
+                <input
+                    type="text"
+                    id={timestampType}
+                    onChange={(e) => handleInput(e, 'seconds')}
+                    value={seconds}
+                    className={styles.input}
+                    placeholder='S'
+                />
+            </div>
+        </>
     )
 }
 
