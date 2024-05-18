@@ -18,18 +18,19 @@ function TimestampInputs({ timestampType, handleTimestampInput }) {
 
     const handleInput = (e, type) => {
         let value = e.target.value
+        let numVal = value === "" ? 0 : parseInt(value);
         switch (type) {
             case 'hours':
-                setHours(parseInt(value))
+                setHours(numVal)
                 break;
             case 'minutes':
-                setMinutes(parseInt(value))
+                setMinutes(numVal)
                 break;
             case 'seconds':
-                setSeconds(parseInt(value))
+                setSeconds(numVal)
                 break;
             default:
-                return;
+                return '';
         }
     }
 
