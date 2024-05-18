@@ -6,6 +6,7 @@ import VideoPlayer from './components/VideoPlayer'
 import { convertToSeconds } from './util/util'
 import CaptionInput from './components/Inputs/CaptionInput'
 import TimestampInputs from './components/Inputs/TimestampInputs'
+import VideoPlayerModal from './components/Modal/VideoPlayerModal'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
   const [captionText, setCaptionText] = useState('')
   const [generateError, setGenerateError] = useState()
   const [captionData, setCaptionData] = useState({})
+  const [isVideoPlayerOpen, setIsVideoPlayerOpen] = useState(false)
 
   const handleVideoUrl = useCallback((url) => {
     if (url) setVideoUrl(url)
@@ -38,11 +40,19 @@ function App() {
   const generateCaption = () => {
     try {
       let obj = {}
-      obj[startingTimestamp] = {timeStart: startingTimestamp, timeEnd: endingTimestamp, text: captionText}
-      setCaptionData({...captionData, ...obj})
+      obj[startingTimestamp] = { timeStart: startingTimestamp, timeEnd: endingTimestamp, text: captionText }
+      setCaptionData({ ...captionData, ...obj })
     } catch (e) {
       console.log(e)
     }
+  }
+
+  const handleVideoPlayerModal = () => {
+    setIsVideoPlayerOpen(true)
+  }
+
+  const closeVideoPlayerModal = () => {
+    setIsVideoPlayerOpen(false)
   }
 
   return (
@@ -52,14 +62,14 @@ function App() {
 
       <div className={styles['timestamp-container']}>
         <div>
-          <TimestampInputs 
-            timestampType="FROM" 
+          <TimestampInputs
+            timestampType="FROM"
             handleTimestampInput={handleTimestampInput}
           />
         </div>
         <div>
-          <TimestampInputs 
-            timestampType="TO" 
+          <TimestampInputs
+            timestampType="TO"
             handleTimestampInput={handleTimestampInput}
           />
         </div>
@@ -69,6 +79,14 @@ function App() {
       <CaptionInput handleCaption={handleCaption} />
 
       <button onClick={() => generateCaption()} className={styles.generatebutton}>Generate</button>
+      <button onClick={handleVideoPlayerModal}>Test Here</button>
+
+      {
+        isVideoPlayerOpen &&
+        <VideoPlayerModal isOpen={isVideoPlayerOpen} onClose={closeVideoPlayerModal}>
+          <VideoPlayer />
+        </VideoPlayerModal>
+      }
     </>
   )
 }
