@@ -5,8 +5,10 @@ import VideoUrlInput from './components/Inputs/VideoUrlInput'
 
 function App() {
 
+  const [videoUrl, setVideoUrl] = useState('')
+
   const handleVideoUrl = (url) => {
-    console.log(url, "VIDEO URL")
+    setVideoUrl(url)
   }
 
   return (
