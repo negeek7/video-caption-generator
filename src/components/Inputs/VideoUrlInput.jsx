@@ -13,9 +13,9 @@ function VideoUrlInput({handleVideoUrl}) {
                 const isValid = checkIfUrlIsValid(url)
             if(isValid){
                 setError(false)
+                handleVideoUrl(url)
             } else {
                 setError(true)
-                handleVideoUrl(url)
             }
             }, 900)
         }
