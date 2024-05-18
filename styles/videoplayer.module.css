@@ -19,3 +19,11 @@
     color: rgba(255, 255, 255, 0.897);
     text-shadow: 0px 0px 8px rgba(255,255,255,0.51);
 }
+
+@media (max-width: 768px) {
+    
+    .container{
+        width: 100%;
+        margin: 0;
+    }
+}
