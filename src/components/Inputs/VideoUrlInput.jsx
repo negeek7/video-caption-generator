@@ -3,7 +3,7 @@ import styles from '../../../styles/videourlinput.module.css'
 
 function VideoUrlInput({handleVideoUrl}) {
 
-    const [url, setUrl] = useState('')
+    const [url, setUrl] = useState('http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4')
     const [error, setError] = useState(null)
 
     useEffect(() => {

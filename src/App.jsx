@@ -17,6 +17,7 @@ function App() {
   const [generateError, setGenerateError] = useState(false)
   const [captionData, setCaptionData] = useState({})
   const [isVideoPlayerOpen, setIsVideoPlayerOpen] = useState(false)
+  const [videoOpenError, setVideoOpenError] = useState(false)
 
   const handleVideoUrl = useCallback((url) => {
     if (url) setVideoUrl(url)
@@ -38,7 +39,7 @@ function App() {
   }, [captionText])
 
   const generateCaption = () => {
-    if(!startingTimestamp || !endingTimestamp || !captionText){
+    if (!startingTimestamp || !endingTimestamp || !captionText) {
       setGenerateError(true)
       return;
     }
@@ -53,7 +54,12 @@ function App() {
   }
 
   const handleVideoPlayerModal = () => {
+    if (!videoUrl) {
+      setVideoOpenError(true)
+      return;
+    }
     setIsVideoPlayerOpen(true)
+    setVideoOpenError(false)
   }
 
   const closeVideoPlayerModal = () => {
@@ -81,8 +87,8 @@ function App() {
       </div>
 
 
-      <CaptionInput 
-        handleCaption={handleCaption} 
+      <CaptionInput
+        handleCaption={handleCaption}
         generateCaption={generateCaption}
       />
 
@@ -92,11 +98,17 @@ function App() {
 
 
       <button className={styles.testbutton} onClick={handleVideoPlayerModal}>Test Here</button>
+      {
+        videoOpenError && <p className={styles.generateError}>Uh oh, Is video URL missing?</p>
+      }
 
       {
         isVideoPlayerOpen &&
         <VideoPlayerModal isOpen={isVideoPlayerOpen} onClose={closeVideoPlayerModal}>
-          <VideoPlayer />
+          <VideoPlayer
+            captionData={captionData}
+            url={videoUrl}
+          />
         </VideoPlayerModal>
       }
     </>
@@ -104,3 +116,4 @@ function App() {
 }
 
 export default App
+// http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4

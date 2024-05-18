@@ -5,10 +5,17 @@
     text-align: center;
     margin-top: 24px;
     border-radius: 4px;
-    /* box-shadow: 0px 0px 32px -7px rgba(240,208,0,1); */
 }
 .video {
     height: 100%;
     width: 100%;
     border-radius: 4px;
+}
+.caption{
+    position: absolute;
+    bottom: 10%;
+    z-index: 80; 
+    left: 42%;
+    color: rgba(255, 255, 255, 0.897);
+    text-shadow: 0px 0px 8px rgba(255,255,255,0.51);
 }
