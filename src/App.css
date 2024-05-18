@@ -5,3 +5,9 @@
   align-items: center;
   gap: 10px;
 }
+
+@media (max-width: 768px) {
+  #root {
+    padding: 16px;
+  }
+}

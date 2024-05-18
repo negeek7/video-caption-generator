@@ -19,8 +19,10 @@
     background-color: #83e883;
 }
 .generateError{
-    color: #ff0000a0
+    color: #ff0000a0;
+    text-align: center
 }
 .generateSuccess{
     color: #83e883;
+    text-align: center;
 }

@@ -3,7 +3,7 @@ import styles from '../../../styles/videourlinput.module.css'
 
 function VideoUrlInput({handleVideoUrl}) {
 
-    const [url, setUrl] = useState('http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4')
+    const [url, setUrl] = useState('')
     const [error, setError] = useState(null)
 
     useEffect(() => {
@@ -52,7 +52,7 @@ function VideoUrlInput({handleVideoUrl}) {
             />
             {
                 error &&
-                <span>Link doesn't look right. (mp4 supported)</span>
+                <span style={{color: "#ff0000a0"}}>Link doesn't look right. (mp4 supported)</span>
             }
         </div>
     )
