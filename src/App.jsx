@@ -14,7 +14,7 @@ function App() {
   const [startingTimestamp, setStartingTimestamp] = useState(0)
   const [endingTimestamp, setEndingTimestamp] = useState(0)
   const [captionText, setCaptionText] = useState('')
-  const [generateError, setGenerateError] = useState()
+  const [generateError, setGenerateError] = useState(false)
   const [captionData, setCaptionData] = useState({})
   const [isVideoPlayerOpen, setIsVideoPlayerOpen] = useState(false)
 
@@ -38,10 +38,15 @@ function App() {
   }, [captionText])
 
   const generateCaption = () => {
+    if(!startingTimestamp || !endingTimestamp || !captionText){
+      setGenerateError(true)
+      return;
+    }
     try {
       let obj = {}
       obj[startingTimestamp] = { timeStart: startingTimestamp, timeEnd: endingTimestamp, text: captionText }
       setCaptionData({ ...captionData, ...obj })
+      setGenerateError(false)
     } catch (e) {
       console.log(e)
     }
@@ -80,6 +85,10 @@ function App() {
         handleCaption={handleCaption} 
         generateCaption={generateCaption}
       />
+
+      {
+        generateError && <p className={styles.generateError}>Make sure to not leave any fields empty. Timestamps and captions.</p>
+      }
 
 
       <button className={styles.testbutton} onClick={handleVideoPlayerModal}>Test Here</button>
