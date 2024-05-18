@@ -1,10 +1,28 @@
+.container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #121212;
+    box-shadow: 0px 0px 32px -3px rgba(59,52,134,1);
+    margin-top: 20px;
+    padding: 0 12px 12px 0;
+
+}
 .textinput{
     resize: none;
     height: 180px;
     width: 280px;
-    box-shadow: 0px 0px 32px -3px rgba(59,52,134,1);
     outline: none;
+    border: none;
     border-radius: 4px;
-    margin-top: 20px;
     padding: 1rem;
+}
+.generatebutton{
+    outline: none;
+    border: none;
+    width: fit-content;
+    float: right;
+}
+.generatebutton:hover{
+    background-color: #3B3486;
 }

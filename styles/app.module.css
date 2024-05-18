@@ -8,10 +8,13 @@
     gap: 12px;
     margin-top: 20px;
 }
-.generatebutton{
-    outline: none;
+.testbutton{
+    background-color: #7ed07e;
+    color: black;
     border: none;
+    outline: none;
+    margin-top: 20px;
 }
-.generatebutton:hover{
-    background-color: #3B3486;
+.testbutton:hover{
+    background-color: #83e883;
 }

@@ -76,10 +76,13 @@ function App() {
       </div>
 
 
-      <CaptionInput handleCaption={handleCaption} />
+      <CaptionInput 
+        handleCaption={handleCaption} 
+        generateCaption={generateCaption}
+      />
 
-      <button onClick={() => generateCaption()} className={styles.generatebutton}>Generate</button>
-      <button onClick={handleVideoPlayerModal}>Test Here</button>
+
+      <button className={styles.testbutton} onClick={handleVideoPlayerModal}>Test Here</button>
 
       {
         isVideoPlayerOpen &&

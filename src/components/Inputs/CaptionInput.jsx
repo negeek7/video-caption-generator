@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from 'react'
 import styles from '../../../styles/captioninput.module.css'
 
-function CaptionInput({ handleCaption }) {
+function CaptionInput({ handleCaption, generateCaption }) {
 
     const [captionInput, setCaptionInput] = useState('')
 
@@ -17,13 +17,16 @@ function CaptionInput({ handleCaption }) {
     }
 
     return (
-        <div>
+        <div className={styles.container}>
             <textarea
                 placeholder='Enter Caption Here...'
                 value={captionInput}
                 onChange={handleCaptionInput}
                 className={styles.textinput}
             />
+            <div>
+            <button onClick={generateCaption} className={styles.generatebutton}>Generate</button>
+            </div>
         </div>
     )
 }
