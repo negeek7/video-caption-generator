@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import './App.css'
 import styles from '../styles/app.module.css'
 import VideoUrlInput from './components/Inputs/VideoUrlInput'
@@ -15,6 +15,7 @@ function App() {
   const [endingTimestamp, setEndingTimestamp] = useState(0)
   const [captionText, setCaptionText] = useState('')
   const [generateError, setGenerateError] = useState(false)
+  const [generateSuccess, setGenerateSuccess] = useState(false)
   const [captionData, setCaptionData] = useState({})
   const [isVideoPlayerOpen, setIsVideoPlayerOpen] = useState(false)
   const [videoOpenError, setVideoOpenError] = useState(false)
@@ -34,6 +35,14 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    if(generateSuccess){
+      setTimeout(() => {
+        setGenerateSuccess(false)
+      }, 800)
+    }
+  }, [startingTimestamp, endingTimestamp, captionText, captionData])
+
   const handleCaption = useCallback((value) => {
     setCaptionText(value)
   }, [captionText])
@@ -41,12 +50,14 @@ function App() {
   const generateCaption = () => {
     if (!startingTimestamp || !endingTimestamp || !captionText) {
       setGenerateError(true)
+      setGenerateSuccess(false)
       return;
     }
     try {
       let obj = {}
       obj[startingTimestamp] = { timeStart: startingTimestamp, timeEnd: endingTimestamp, text: captionText }
       setCaptionData({ ...captionData, ...obj })
+      setGenerateSuccess(true)
       setGenerateError(false)
     } catch (e) {
       console.log(e)
@@ -94,6 +105,9 @@ function App() {
 
       {
         generateError && <p className={styles.generateError}>Make sure to not leave any fields empty. Timestamps and captions.</p>
+      }
+      {
+        generateSuccess && <p className={styles.generateSuccess}>Caption Generated.</p>
       }
 
 
